@@ -1,28 +1,22 @@
 <template>
-  <div class="pictures">
-    <h3>Выберите изображение</h3>
+  <div class="borders">
+    <h3>Borders</h3>
     <p>
       для начала выберите основу, саму картину, на которую вы и гости вашего праздника
       <br />будете наносить отпечатки пальцев с пожеланиями
     </p>
     <div class="container">
-      <div class="imgbox">
-        <img src="@/assets/img/pics/01.jpg" />
-      </div>
+      <div class="imgbox"></div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {};
-  }
-};
+export default {};
 </script>
 
 <style scoped>
-.pictures {
+.borders {
   position: absolute;
   width: 550px;
   height: 410px;
@@ -42,9 +36,5 @@ export default {
   height: 140px;
   width: 100px;
   border: 1px solid gray;
-}
-img {
-  height: 140px;
-  width: 100px;
 }
 </style>

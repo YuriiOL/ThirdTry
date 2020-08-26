@@ -7,7 +7,9 @@
       <p>Отпечатки: Не выбрано</p>
     </div>
     <div class="chosenElement">Content Box</div>
-    <button>Next</button>
+    <router-link :to="{name: 'Borders'}">
+      <button>Next</button>
+    </router-link>
   </div>
 </template>
 
@@ -27,7 +29,7 @@ export default {};
   border-bottom-right-radius: 20px;
 }
 .sideHead {
-  height: 24px;
+  height: 25px;
   border-bottom: 1px solid gray;
   padding: 11px 30px 0px 20px;
   font-size: 20px;

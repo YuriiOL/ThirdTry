@@ -25,5 +25,6 @@ div {
 .header {
   padding: 10px;
   border-right: none;
+  border-bottom: 1px solid gray;
 }
 </style>
