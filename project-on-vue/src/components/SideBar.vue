@@ -6,7 +6,9 @@
       <p>Рама: Не выбрано</p>
       <p>Отпечатки: Не выбрано</p>
     </div>
-    <div class="chosenElement">Content Box</div>
+    <div class="chosenElement">
+      <img v-if="chosenItems != ''" :src="chosenItems[0].img" alt />
+    </div>
     <button @click="$router.push('/borders')" v-if="$router.history.current.name == 'Wrapper'">ДАЛЕЕ</button>
     <button @click="$router.push('/titles')" v-if="$router.history.current.name == 'Borders'">ДАЛЕЕ</button>
     <button @click="$router.push('/colors')" v-if="$router.history.current.name == 'Titles'">ДАЛЕЕ</button>
@@ -15,7 +17,12 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters(["chosenItems"])
+  }
+};
 </script>
 
 <style scoped>
@@ -40,6 +47,12 @@ export default {};
   width: 180px;
   height: 250px;
   border: 1px solid gray;
+  background-color: white;
+}
+img {
+  margin: 10px;
+  width: 160px;
+  height: 230px;
 }
 button {
   border: 1px solid gray;

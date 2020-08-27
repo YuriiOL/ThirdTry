@@ -6,16 +6,19 @@
       <br />будете наносить отпечатки пальцев с пожеланиями
     </p>
     <div class="container">
-      <img v-for="i in pics" :key="i.id" :src="i.img" />
+      <img v-for="i in pics" :key="i.id" :src="i.img" @click="addItem(i)" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   computed: {
     ...mapGetters(["pics"])
+  },
+  methods: {
+    ...mapMutations(["addItem"])
   }
 };
 </script>

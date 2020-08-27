@@ -203,14 +203,21 @@ export default new Vuex.Store({
         name: 'Tangelo',
         img: require("@/assets/img/marks/Tangelo.jpg"),
       },
-    ]
+    ],
+    chosenItems: []
   },
   getters: {
-    pics: (state) => state.pics,
-    borders: (state) => state.borders,
-    colors: state => state.colors
+    pics: state => state.pics,
+    borders: state => state.borders,
+    colors: state => state.colors,
+    chosenItems: state => state.chosenItems
   },
-  mutations: {},
+  mutations: {
+    addItem(state, value) {
+      console.log(state.chosenItems)
+      return state.chosenItems.splice(0, 1, value)
+    }
+  },
   actions: {},
   modules: {}
 });
