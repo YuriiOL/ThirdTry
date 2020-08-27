@@ -6,7 +6,7 @@
       <br />будете наносить отпечатки пальцев с пожеланиями
     </p>
     <div class="container">
-      <img v-for="i in pics" :key="i.id" :src="i.img" @click="addItem(i)" />
+      <img v-for="i in pics" :key="i.id" :src="i.img" @click="addpics(i)" />
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
     ...mapGetters(["pics"])
   },
   methods: {
-    ...mapMutations(["addItem"])
+    ...mapMutations(["addpics"])
   }
 };
 </script>

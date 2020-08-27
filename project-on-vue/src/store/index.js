@@ -204,18 +204,24 @@ export default new Vuex.Store({
         img: require("@/assets/img/marks/Tangelo.jpg"),
       },
     ],
-    chosenItems: []
+    chosenBorder: [],
+    chosenPics: []
   },
   getters: {
     pics: state => state.pics,
     borders: state => state.borders,
     colors: state => state.colors,
-    chosenItems: state => state.chosenItems
+    chosenPics: state => state.chosenPics,
+    chosenBorder: state => state.chosenBorder
   },
   mutations: {
-    addItem(state, value) {
-      console.log(state.chosenItems)
-      return state.chosenItems.splice(0, 1, value)
+    addpics(state, value) {
+      console.log(state.chosenPics)
+      return state.chosenPics.splice(0, 1, value)
+    },
+    addborder(state, value) {
+      console.log(state.chosenBorder)
+      return state.chosenBorder.splice(0, 1, value)
     }
   },
   actions: {},

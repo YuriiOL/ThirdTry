@@ -7,7 +7,8 @@
       <p>Отпечатки: Не выбрано</p>
     </div>
     <div class="chosenElement">
-      <img v-if="chosenItems != ''" :src="chosenItems[0].img" alt />
+      <img class="Pics" v-if="chosenPics != ''" :src="chosenPics[0].img" alt />
+      <img class="Border" v-if="chosenBorder != ''" :src="chosenBorder[0].img" alt />
     </div>
     <button @click="$router.push('/borders')" v-if="$router.history.current.name == 'Wrapper'">ДАЛЕЕ</button>
     <button @click="$router.push('/titles')" v-if="$router.history.current.name == 'Borders'">ДАЛЕЕ</button>
@@ -20,7 +21,7 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["chosenItems"])
+    ...mapGetters(["chosenBorder", "chosenPics"])
   }
 };
 </script>
@@ -49,10 +50,18 @@ export default {
   border: 1px solid gray;
   background-color: white;
 }
-img {
-  margin: 10px;
-  width: 160px;
-  height: 230px;
+.Pics {
+  z-index: 1;
+  position: absolute;
+  margin: 20px;
+  width: 139px;
+  height: 209px;
+}
+.Border {
+  z-index: 0;
+  position: absolute;
+  width: 180px;
+  height: 250px;
 }
 button {
   border: 1px solid gray;

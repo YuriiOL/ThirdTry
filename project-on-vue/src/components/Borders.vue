@@ -6,16 +6,19 @@
       <br />просто оставляете "пальчики", а создаете предмет декора для дома и офиса:
     </p>
     <div class="container">
-      <img v-for="i in borders" :key="i.id" :src="i.img" />
+      <img v-for="i in borders" :key="i.id" :src="i.img" @click="addborder(i)" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   computed: {
     ...mapGetters(["borders"])
+  },
+  methods: {
+    ...mapMutations(["addborder"])
   }
 };
 </script>
