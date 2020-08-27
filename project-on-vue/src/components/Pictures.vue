@@ -6,17 +6,16 @@
       <br />будете наносить отпечатки пальцев с пожеланиями
     </p>
     <div class="container">
-      <div class="imgbox">
-        <img src="@/assets/img/pics/01.jpg" />
-      </div>
+      <img v-for="i in pics" :key="i.id" :src="i.img" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  data() {
-    return {};
+  computed: {
+    ...mapGetters(["pics"])
   }
 };
 </script>
@@ -37,14 +36,16 @@ export default {
   border: 1px solid gray;
   height: 300px;
   width: 500px;
+  overflow-y: scroll;
+  padding-left: 10px;
 }
-.imgbox {
-  height: 140px;
-  width: 100px;
-  border: 1px solid gray;
-}
+
 img {
-  height: 140px;
-  width: 100px;
+  height: 190px;
+  width: 145px;
+  border: 1px solid gray;
+  float: left;
+  margin: 5px;
+  border-radius: 10px;
 }
 </style>

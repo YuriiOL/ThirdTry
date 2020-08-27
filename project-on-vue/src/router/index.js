@@ -17,6 +17,24 @@ const routes = [{
     // which is lazy-loaded when the route is visited.
     component: () =>
       import( /* webpackChunkName: "borders" */ "../views/BorderWrapper.vue")
+  },
+  {
+    path: "/titles",
+    name: "Titles",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import( /* webpackChunkName: "borders" */ "../views/TitlesWrapper.vue")
+  },
+  {
+    path: "/colors",
+    name: "Colors",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import( /* webpackChunkName: "borders" */ "../views/ColorsWrapper.vue")
   }
 ];
 

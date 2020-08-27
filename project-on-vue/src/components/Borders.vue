@@ -1,18 +1,23 @@
 <template>
   <div class="borders">
-    <h3>Borders</h3>
+    <h3>Рама</h3>
     <p>
-      для начала выберите основу, саму картину, на которую вы и гости вашего праздника
-      <br />будете наносить отпечатки пальцев с пожеланиями
+      Подберите раму, которая подойдет случаю и впишется в интерьер, ведь вы же не
+      <br />просто оставляете "пальчики", а создаете предмет декора для дома и офиса:
     </p>
     <div class="container">
-      <div class="imgbox"></div>
+      <img v-for="i in borders" :key="i.id" :src="i.img" />
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters(["borders"])
+  }
+};
 </script>
 
 <style scoped>
@@ -31,10 +36,14 @@ export default {};
   border: 1px solid gray;
   height: 300px;
   width: 500px;
+  overflow-y: scroll;
 }
-.imgbox {
-  height: 140px;
-  width: 100px;
+img {
+  height: 190px;
+  width: 145px;
   border: 1px solid gray;
+  float: left;
+  margin: 5px;
+  border-radius: 10px;
 }
 </style>

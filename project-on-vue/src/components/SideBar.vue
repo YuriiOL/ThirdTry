@@ -8,7 +8,7 @@
     </div>
     <div class="chosenElement">Content Box</div>
     <router-link :to="{name: 'Borders'}">
-      <button>Next</button>
+      <button>ДАЛЕЕ</button>
     </router-link>
   </div>
 </template>
