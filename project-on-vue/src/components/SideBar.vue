@@ -7,9 +7,10 @@
       <p>Отпечатки: Не выбрано</p>
     </div>
     <div class="chosenElement">Content Box</div>
-    <router-link :to="{name: 'Borders'}">
-      <button>ДАЛЕЕ</button>
-    </router-link>
+    <button @click="$router.push('/borders')" v-if="$router.history.current.name == 'Wrapper'">ДАЛЕЕ</button>
+    <button @click="$router.push('/titles')" v-if="$router.history.current.name == 'Borders'">ДАЛЕЕ</button>
+    <button @click="$router.push('/colors')" v-if="$router.history.current.name == 'Titles'">ДАЛЕЕ</button>
+    <button @click="$router.push('/')" v-if="$router.history.current.name == 'Colors'">ДАЛЕЕ</button>
   </div>
 </template>
 

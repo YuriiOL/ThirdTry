@@ -76,89 +76,89 @@ export default new Vuex.Store({
         id: 1,
         name: 'Рама 1',
         img: require("@/assets/img/borders/rama-01.png"),
-        price: 1500
+        price: 100
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 2,
+        name: 'Рама 2',
         img: require("@/assets/img/borders/rama-02.png"),
-        price: 1500
+        price: 200
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 3,
+        name: 'Рама 3',
         img: require("@/assets/img/borders/rama-03.png"),
-        price: 1500
+        price: 300
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 4,
+        name: 'Рама 4',
         img: require("@/assets/img/borders/rama-04.png"),
-        price: 1500
+        price: 400
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 5,
+        name: 'Рама 5',
         img: require("@/assets/img/borders/rama-05.png"),
-        price: 1500
+        price: 500
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 6,
+        name: 'Рама 6',
         img: require("@/assets/img/borders/rama-06.png"),
-        price: 1500
+        price: 600
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 7,
+        name: 'Рама 7',
         img: require("@/assets/img/borders/rama-07.png"),
-        price: 1500
+        price: 700
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 8,
+        name: 'Рама 8',
         img: require("@/assets/img/borders/rama-08.png"),
-        price: 1500
+        price: 800
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 9,
+        name: 'Рама 9',
         img: require("@/assets/img/borders/rama-09.png"),
-        price: 1500
+        price: 900
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 10,
+        name: 'Рама 10',
         img: require("@/assets/img/borders/rama-10.png"),
-        price: 1500
+        price: 1000
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 11,
+        name: 'Рама 11',
         img: require("@/assets/img/borders/rama-11.png"),
-        price: 1500
+        price: 1100
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 12,
+        name: 'Рама 12',
         img: require("@/assets/img/borders/rama-12.png"),
-        price: 1500
+        price: 1200
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 13,
+        name: 'Рама 13',
         img: require("@/assets/img/borders/rama-13.png"),
-        price: 1500
+        price: 1300
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 14,
+        name: 'Рама 14',
         img: require("@/assets/img/borders/rama-14.png"),
-        price: 1500
+        price: 1400
       },
       {
-        id: 1,
-        name: 'Рама 1',
+        id: 15,
+        name: 'Рама 15',
         img: require("@/assets/img/borders/rama-15.png"),
         price: 1500
       },
