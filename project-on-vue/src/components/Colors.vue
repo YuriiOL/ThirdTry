@@ -6,16 +6,19 @@
       <br />оставите на картине свой след на память!
     </p>
     <div class="container">
-      <img v-for="i in colors" :key="i.id" :src="i.img" />
+      <img v-for="i in colors" :key="i.id" :src="i.img" @click="addColors(i.color)" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["colors"])
+    ...mapGetters(["colors", "chosenColors"])
+  },
+  methods: {
+    ...mapMutations(["addColors"])
   }
 };
 </script>

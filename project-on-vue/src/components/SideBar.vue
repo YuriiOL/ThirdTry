@@ -4,21 +4,36 @@
     <div class="textInfo">
       <p>Изображение: Не выбрано</p>
       <p>Рама: Не выбрано</p>
-      <p>Отпечатки: Не выбрано</p>
+      <p>
+        Отпечатки:
+        <img class="colors" v-for="j in chosenColors" :key="j.id" :src="j" alt />
+      </p>
     </div>
     <div class="chosenElement">
       <div
         class="title1"
-        :class="{addFontAriston:font == 1, addFontDavinci:font == 2, addFontBrody:font == 3}"
-      >{{titles.title1}}</div>
+        :class="{
+          addFontAriston: font == 1,
+          addFontDavinci: font == 2,
+          addFontBrody: font == 3
+        }"
+      >{{ titles.title1 }}</div>
       <div
         class="title2"
-        :class="{addFontAriston:font == 1, addFontDavinci:font == 2, addFontBrody:font == 3}"
-      >{{titles.title2}}</div>
+        :class="{
+          addFontAriston: font == 1,
+          addFontDavinci: font == 2,
+          addFontBrody: font == 3
+        }"
+      >{{ titles.title2 }}</div>
       <div
         class="title3"
-        :class="{addFontAriston:font == 1, addFontDavinci:font == 2, addFontBrody:font == 3}"
-      >{{titles.title3}}</div>
+        :class="{
+          addFontAriston: font == 1,
+          addFontDavinci: font == 2,
+          addFontBrody: font == 3
+        }"
+      >{{ titles.title3 }}</div>
       <img class="Pics" v-if="chosenPics != ''" :src="chosenPics[0].img" alt />
       <img class="Border" v-if="chosenBorder != ''" :src="chosenBorder[0].img" alt />
     </div>
@@ -33,7 +48,13 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["chosenBorder", "chosenPics", "titles", "font"])
+    ...mapGetters([
+      "chosenBorder",
+      "chosenPics",
+      "titles",
+      "font",
+      "chosenColors"
+    ])
   }
 };
 </script>
@@ -121,5 +142,11 @@ button {
 }
 .addFontBrody {
   font-family: Brody;
+}
+.colors {
+  width: 13px;
+  height: 13px;
+  margin-left: 3px;
+  border-radius: 3px;
 }
 </style>
