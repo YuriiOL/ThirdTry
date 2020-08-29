@@ -7,6 +7,18 @@
       <p>Отпечатки: Не выбрано</p>
     </div>
     <div class="chosenElement">
+      <div
+        class="title1"
+        :class="{addFontAriston:font == 1, addFontDavinci:font == 2, addFontBrody:font == 3}"
+      >{{titles.title1}}</div>
+      <div
+        class="title2"
+        :class="{addFontAriston:font == 1, addFontDavinci:font == 2, addFontBrody:font == 3}"
+      >{{titles.title2}}</div>
+      <div
+        class="title3"
+        :class="{addFontAriston:font == 1, addFontDavinci:font == 2, addFontBrody:font == 3}"
+      >{{titles.title3}}</div>
       <img class="Pics" v-if="chosenPics != ''" :src="chosenPics[0].img" alt />
       <img class="Border" v-if="chosenBorder != ''" :src="chosenBorder[0].img" alt />
     </div>
@@ -21,7 +33,7 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["chosenBorder", "chosenPics"])
+    ...mapGetters(["chosenBorder", "chosenPics", "titles", "font"])
   }
 };
 </script>
@@ -49,6 +61,7 @@ export default {
   height: 250px;
   border: 1px solid gray;
   background-color: white;
+  position: relative;
 }
 .Pics {
   z-index: 1;
@@ -80,5 +93,33 @@ button {
 .textInfo {
   margin: 20px 20px;
   margin-bottom: none;
+}
+.title1,
+.title2,
+.title3 {
+  width: 100px;
+  text-align: center;
+  z-index: 2;
+  position: absolute;
+  left: 40px;
+  top: 35px;
+  font-size: 15px;
+}
+.title2 {
+  left: 40px;
+  top: 185px;
+}
+.title3 {
+  left: 40px;
+  top: 205px;
+}
+.addFontAriston {
+  font-family: Ariston;
+}
+.addFontDavinci {
+  font-family: Davinci;
+}
+.addFontBrody {
+  font-family: Brody;
 }
 </style>

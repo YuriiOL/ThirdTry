@@ -205,14 +205,23 @@ export default new Vuex.Store({
       },
     ],
     chosenBorder: [],
-    chosenPics: []
+    chosenPics: [],
+    titles: {
+      title1: '',
+      title2: '',
+      title3: ''
+    },
+    //variable whats change the fonts of input titles
+    font: 0
   },
   getters: {
     pics: state => state.pics,
     borders: state => state.borders,
     colors: state => state.colors,
     chosenPics: state => state.chosenPics,
-    chosenBorder: state => state.chosenBorder
+    chosenBorder: state => state.chosenBorder,
+    titles: state => state.titles,
+    font: state => state.font
   },
   mutations: {
     addpics(state, value) {
@@ -222,7 +231,10 @@ export default new Vuex.Store({
     addborder(state, value) {
       console.log(state.chosenBorder)
       return state.chosenBorder.splice(0, 1, value)
-    }
+    },
+    addFontAriston: state => state.font = 1,
+    addFontDavinci: state => state.font = 2,
+    addFontBrody: state => state.font = 3,
   },
   actions: {},
   modules: {}
