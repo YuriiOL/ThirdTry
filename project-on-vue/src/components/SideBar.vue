@@ -40,7 +40,7 @@
     <button @click="$router.push('/borders')" v-if="$router.history.current.name == 'Wrapper'">ДАЛЕЕ</button>
     <button @click="$router.push('/titles')" v-if="$router.history.current.name == 'Borders'">ДАЛЕЕ</button>
     <button @click="$router.push('/colors')" v-if="$router.history.current.name == 'Titles'">ДАЛЕЕ</button>
-    <button @click="$router.push('/')" v-if="$router.history.current.name == 'Colors'">ДАЛЕЕ</button>
+    <button @click="send" v-if="$router.history.current.name == 'Colors'">В КОРЗИНУ</button>
   </div>
 </template>
 
@@ -53,8 +53,21 @@ export default {
       "chosenPics",
       "titles",
       "font",
-      "chosenColors"
+      "chosenColors",
+      "order"
     ])
+  },
+  methods: {
+    send() {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ order: this.order })
+      };
+      fetch("https://jsonplaceholder.typicode.com/posts", requestOptions)
+        .then(response => response.json())
+        .then(data => (this.postId = data.id));
+    }
   }
 };
 </script>

@@ -220,8 +220,9 @@ export default new Vuex.Store({
       title2: "",
       title3: ""
     },
-    //variable whats change the fonts of input titles
-    font: 0
+    //variable change the fonts of input titles
+    font: 0,
+    order: []
   },
   getters: {
     pics: state => state.pics,
@@ -231,28 +232,38 @@ export default new Vuex.Store({
     chosenBorder: state => state.chosenBorder,
     titles: state => state.titles,
     font: state => state.font,
-    chosenColors: state => state.chosenColors
+    chosenColors: state => state.chosenColors,
+    order: state => state.order
   },
   mutations: {
     addpics(state, value) {
-      console.log(state.chosenPics);
-      return state.chosenPics.splice(0, 1, value);
+      state.chosenPics.splice(0, 1, value);
+      state.order.splice(0, 1, value.name)
     },
     addborder(state, value) {
-      console.log(state.chosenBorder);
-      return state.chosenBorder.splice(0, 1, value);
+      state.chosenBorder.splice(0, 1, value);
+      state.order.splice(1, 1, value.name)
     },
-    addFontAriston: state => (state.font = 1),
-    addFontDavinci: state => (state.font = 2),
-    addFontBrody: state => (state.font = 3),
+    addFontAriston: state => {
+      state.font = 1
+      state.order.splice(2, 1, `Titles: ${Object.values(state.titles)} Font: Ariston`)
+    },
+    addFontDavinci: state => {
+      state.font = 2
+      state.order.splice(2, 1, `Titles: ${Object.values(state.titles)} Font: DaVinci`)
+    },
+    addFontBrody: state => {
+      state.font = 3
+      state.order.splice(2, 1, `Titles: ${Object.values(state.titles)} Font: Brody`)
+    },
     addColors(state, value) {
       if (state.chosenColors.length < 8) {
-        return state.chosenColors.push(value);
+        state.chosenColors.push(value.color);
+        state.order.push(value.name);
       } else {
-        return
+        return;
       }
-
-    }
+    },
   },
   actions: {},
   modules: {}

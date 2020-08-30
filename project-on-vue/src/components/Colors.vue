@@ -6,7 +6,7 @@
       <br />оставите на картине свой след на память!
     </p>
     <div class="container">
-      <img v-for="i in colors" :key="i.id" :src="i.img" @click="addColors(i.color)" />
+      <img v-for="i in colors" :key="i.id" :src="i.img" @click="addColors(i)" />
     </div>
   </div>
 </template>
