@@ -2,20 +2,25 @@ s<template>
   <div class="sideBar">
     <div class="sideHead">Ваша картина</div>
     <div class="textInfo">
+      <!-- show the name of selected picture -->
       <p>
         Изображение:
-        <span class="title" v-if="chosenPics != ''">{{chosenPics[0].name}}</span>
+        <span class="title" v-if="chosenPics != ''">{{ chosenPics[0].name }}</span>
       </p>
+      <!-- show the name of selected border -->
       <p>
         Рама:
-        <span class="title" v-if="chosenBorder != ''">{{chosenBorder[0].name}}</span>
+        <span class="title" v-if="chosenBorder != ''">{{ chosenBorder[0].name }}</span>
       </p>
+      <!-- show the list of colors -->
       <p>
         Отпечатки:
         <img class="colors" v-for="j in chosenColors" :key="j.id" :src="j" alt />
       </p>
     </div>
+    <!-- shows all chosen elements -->
     <div class="chosenElement">
+      <!-- add title -->
       <div
         class="title1"
         :class="{
@@ -24,6 +29,7 @@ s<template>
           addFontBrody: font == 3
         }"
       >{{ titles.title1 }}</div>
+      <!-- add title -->
       <div
         class="title2"
         :class="{
@@ -32,6 +38,7 @@ s<template>
           addFontBrody: font == 3
         }"
       >{{ titles.title2 }}</div>
+      <!-- add title -->
       <div
         class="title3"
         :class="{
@@ -40,13 +47,23 @@ s<template>
           addFontBrody: font == 3
         }"
       >{{ titles.title3 }}</div>
+      <!-- add img of pictures -->
       <img class="Pics" v-if="chosenPics != ''" :src="chosenPics[0].img" alt />
+      <!-- add img of border -->
       <img class="Border" v-if="chosenBorder != ''" :src="chosenBorder[0].img" alt />
     </div>
+    <!-- depending on routs show button what send u to next routs  -->
     <button @click="$router.push('/borders')" v-if="$router.history.current.name == 'Wrapper'">ДАЛЕЕ</button>
     <button @click="$router.push('/titles')" v-if="$router.history.current.name == 'Borders'">ДАЛЕЕ</button>
     <button @click="$router.push('/colors')" v-if="$router.history.current.name == 'Titles'">ДАЛЕЕ</button>
-    <button @click="orderPrice(); send()" v-if="$router.history.current.name == 'Colors'">В КОРЗИНУ</button>
+    <!-- add order info to payloadd -->
+    <button
+      @click="
+        orderPrice();
+        send();
+      "
+      v-if="$router.history.current.name == 'Colors'"
+    >В КОРЗИНУ</button>
   </div>
 </template>
 
@@ -65,6 +82,7 @@ export default {
   },
   methods: {
     ...mapMutations(["orderPrice"]),
+    //make post request
     send() {
       const requestOptions = {
         method: "POST",
@@ -130,6 +148,15 @@ button {
   outline: none !important;
   border: 1px;
   font-family: "Times New Roman";
+}
+button {
+  background-color: rgb(124, 187, 30);
+  transition: 300ms linear 300ms;
+}
+
+button:hover {
+  background-color: rgb(137, 228, 2);
+  box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.3);
 }
 .textInfo {
   margin: 20px 20px;

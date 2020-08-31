@@ -2,16 +2,23 @@
   <div class="borders">
     <h3>Рама</h3>
     <p>
-      Подберите раму, которая подойдет случаю и впишется в интерьер, ведь вы же не
-      <br />просто оставляете "пальчики", а создаете предмет декора для дома и офиса:
+      Подберите раму, которая подойдет случаю и впишется в интерьер, ведь вы же
+      не
+      <br />просто оставляете "пальчики", а создаете предмет декора для дома и
+      офиса:
     </p>
     <div class="container">
+      <!-- show all images from store state borders -->
+      <!-- onclick give class="highlight" to image and make it visual selected   -->
       <img
         v-for="i in borders"
         :key="i.id"
         :src="i.img"
-        @click="addborder(i); selectBorder(i.id)"
-        :class="{highlight: i.id == selectBorders}"
+        @click="
+          addborder(i);
+          selectBorder(i.id);
+        "
+        :class="{ highlight: i.id == selectBorders }"
       />
     </div>
   </div>

@@ -3,16 +3,20 @@
     <h3>Выберите изображение</h3>
     <p>
       для начала выберите основу, саму картину, на которую вы и гости вашего
-      <br />праздника
-      будете наносить отпечатки пальцев с пожеланиями
+      <br />праздника будете наносить отпечатки пальцев с пожеланиями
     </p>
     <div class="container">
+      <!-- show all images from store state pics -->
+      <!-- onclick give class="highlight" to image and make it visual selected   -->
       <img
         v-for="i in pics"
         :key="i.id"
         :src="i.img"
-        @click="addpics(i); selectPicss(i.id)"
-        :class="{highlight: i.id == selectPics}"
+        @click="
+          addpics(i);
+          selectPicss(i.id);
+        "
+        :class="{ highlight: i.id == selectPics }"
       />
     </div>
   </div>

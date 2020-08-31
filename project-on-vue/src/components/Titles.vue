@@ -2,37 +2,30 @@
   <div class="titles">
     <h3>Заголовок</h3>
     <p>
-      персонализируйте ваше "Дерево пожеланий", вверху и в низу картины есть спецыальне поля которые можно заполнить по вашему усмотрению: вписать имена виновников торжества, или особые пожелания, добавить дату, или логотип компании, если речь
+      персонализируйте ваше "Дерево пожеланий", вверху и в низу картины есть
+      спецыальне поля которые можно заполнить по вашему усмотрению: вписать
+      имена виновников торжества, или особые пожелания, добавить дату, или
+      логотип компании, если речь
       <br />идьот о корпоративном порядке.
     </p>
+    <!--writing titles for sidebar -->
     <input type="text" placeholder="Наша свадьба" v-model="titles.title1" />Заголовок картины
     <br />
     <input type="text" placeholder="Анастасия и Констатин" v-model="titles.title2" />Подпись
     <br />
-    <input type="text" placeholder="29 июля 2015" v-model="titles.title3" />Дата события
+    <input type="text" placeholder="29 июля 2015" v-model="titles.title3" />Дата
+    события
     <br />
-    <button
-      @click="addFontAriston"
-      :class="{
-          addFontAriston: font == 1,
-          
-        }"
-    >Ariston</button>
-    <button
-      @click="addFontDavinci"
-      :class="{
-          
-          addFontDavinci: font == 2,
-         
-        }"
-    >DaVinci</button>
-    <button
-      @click="addFontBrody"
-      :class="{
-          
-          addFontBrody: font == 3
-        }"
-    >Brody</button>
+    <!-- buttons gives font for titles in side bar -->
+    <button @click="addFontAriston" :class="{
+        addFontAriston: font == 1
+      }">Ariston</button>
+    <button @click="addFontDavinci" :class="{
+        addFontDavinci: font == 2
+      }">DaVinci</button>
+    <button @click="addFontBrody" :class="{
+        addFontBrody: font == 3
+      }">Brody</button>
   </div>
 </template>
 

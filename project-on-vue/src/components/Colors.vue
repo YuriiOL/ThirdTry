@@ -6,12 +6,16 @@
       <br />оставите на картине свой след на память!
     </p>
     <div class="container">
+      <!-- add little pics of selected colors from store state colors -->
       <img
         v-for="i in colors"
         :key="i.id"
         :src="i.img"
-        @click="addColors(i); i.select = true"
-        v-bind:class="{select: i.select}"
+        @click="
+          addColors(i);
+          i.select = true;
+        "
+        v-bind:class="{ select: i.select }"
       />
     </div>
   </div>
