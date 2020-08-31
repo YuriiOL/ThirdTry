@@ -238,13 +238,14 @@ export default new Vuex.Store({
     //font: variable change the fonts of input titles
     font: 0,
     //price: variable change the price depend from selections
-    price: 0,
+    price: [],
     //Information about selecting items, will go to Payload
     order: [],
     //variable make visual selected picture
     selectPics: 0,
     //variable make visual selected border
-    selectBorders: 0
+    selectBorders: 0,
+    sum: 0
   },
   getters: {
     pics: state => state.pics,
@@ -258,20 +259,28 @@ export default new Vuex.Store({
     order: state => state.order,
     price: state => state.price,
     selectPics: state => state.selectPics,
-    selectBorders: state => state.selectBorders
+    selectBorders: state => state.selectBorders,
+    sum: state => state.sum
   },
   mutations: {
     //add only one picture to array chosenPics, also add price, and order info to order array
     addpics(state, value) {
       state.chosenPics.splice(0, 1, value);
-      state.price += value.price;
+      state.price.splice(0, 1, value.price);
       state.order.splice(0, 1, value.name);
+      state.sum = state.price.reduce(function (a, b) {
+        return a + b;
+      }, 0);
     },
+
     //add only one border to array chosenBorder, also add price, and order info to order array
     addborder(state, value) {
       state.chosenBorder.splice(0, 1, value);
-      state.price += value.price;
+      state.price.splice(1, 1, value.price);
       state.order.splice(1, 1, value.name);
+      state.sum = state.price.reduce(function (a, b) {
+        return a + b;
+      }, 0);
     },
     //add titles in side bar, save information about titles and font
     addFontAriston: state => {
@@ -306,10 +315,16 @@ export default new Vuex.Store({
         state.order.push(value.name);
         state.chosenColors.push(value.color);
         if (state.chosenColors.length == 3) {
-          state.price += 30;
+          state.price.push(30);
+          state.sum = state.price.reduce(function (a, b) {
+            return a + b;
+          }, 0);
         }
         if (state.chosenColors.length == 6) {
-          state.price += 30;
+          state.price.push(30)
+          state.sum = state.price.reduce(function (a, b) {
+            return a + b;
+          }, 0);
         }
       } else {
         return;
@@ -317,7 +332,7 @@ export default new Vuex.Store({
     },
     //save price info to order list 
     orderPrice(state) {
-      state.order.push(`Price: ${state.price}`);
+      state.order.push(`Price: ${state.sum}`);
     },
     //highlight select picture
     selectPicss(state, value) {
@@ -326,7 +341,7 @@ export default new Vuex.Store({
     //highlight select border
     selectBorder(state, value) {
       state.selectBorders = value;
-    }
+    },
   },
   actions: {},
   modules: {}

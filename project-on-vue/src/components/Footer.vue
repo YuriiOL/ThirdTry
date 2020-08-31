@@ -3,7 +3,7 @@
     <div class="price">
       Стоимость:
       <span class="numbers">
-        {{price}}
+        {{sum}}
         <span class="grn">грн</span>
       </span>
     </div>
@@ -14,7 +14,7 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["price"])
+    ...mapGetters(["sum"])
   }
 };
 </script>
