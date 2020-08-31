@@ -3,7 +3,7 @@
     <div class="price">
       Стоимость:
       <span class="numbers">
-        {{sum}}
+        {{ sum }}
         <span class="grn">грн</span>
       </span>
     </div>
