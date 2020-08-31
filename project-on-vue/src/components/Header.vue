@@ -1,9 +1,13 @@
 <template>
   <div class="header">
-    <div>1 Изображение</div>
-    <div>2 Рама</div>
-    <div>3 Заголовок</div>
-    <div class="last">4 Цвет Отпечатков</div>
+    <div v-if="$router.history.current.name == 'Wrapper'" class="bold">1 Изображение</div>
+    <div v-else>1 Изображение</div>
+    <div v-if="$router.history.current.name == 'Borders'" class="bold">2 Рама</div>
+    <div v-else>2 Рама</div>
+    <div v-if="$router.history.current.name == 'Titles'" class="bold">3 Заголовок</div>
+    <div v-else>3 Заголовок</div>
+    <div class="last bold" v-if="$router.history.current.name == 'Colors'">4 Цвет Отпечатков</div>
+    <div class="last" v-else>4 Цвет Отпечатков</div>
   </div>
 </template>
 
@@ -26,5 +30,8 @@ div {
   padding: 10px;
   border-right: none;
   border-bottom: 1px solid gray;
+}
+.bold {
+  font-weight: bold;
 }
 </style>

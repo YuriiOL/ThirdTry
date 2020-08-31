@@ -6,7 +6,13 @@
       <br />оставите на картине свой след на память!
     </p>
     <div class="container">
-      <img v-for="i in colors" :key="i.id" :src="i.img" @click="addColors(i)" />
+      <img
+        v-for="i in colors"
+        :key="i.id"
+        :src="i.img"
+        @click="addColors(i); i.select = true"
+        v-bind:class="{select: i.select}"
+      />
     </div>
   </div>
 </template>
@@ -40,5 +46,13 @@ img {
   float: left;
   margin: 5px;
   border-radius: 10px;
+}
+img:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.select {
+  border: 2px solid rgb(148, 218, 45);
+  margin: 4px;
 }
 </style>

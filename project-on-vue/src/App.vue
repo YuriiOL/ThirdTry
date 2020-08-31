@@ -27,4 +27,8 @@
   src: local("brody"),
     url(./fonts/brody/jabgndg5-webfont.ttf) format("truetype");
 }
+body {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: grey;
+}
 </style>

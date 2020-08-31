@@ -6,7 +6,13 @@
       <br />просто оставляете "пальчики", а создаете предмет декора для дома и офиса:
     </p>
     <div class="container">
-      <img v-for="i in borders" :key="i.id" :src="i.img" @click="addborder(i)" />
+      <img
+        v-for="i in borders"
+        :key="i.id"
+        :src="i.img"
+        @click="addborder(i); selectBorder(i.id)"
+        :class="{highlight: i.id == selectBorders}"
+      />
     </div>
   </div>
 </template>
@@ -15,10 +21,10 @@
 import { mapGetters, mapMutations } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["borders"])
+    ...mapGetters(["borders", "selectBorders"])
   },
   methods: {
-    ...mapMutations(["addborder"])
+    ...mapMutations(["addborder", "selectBorder"])
   }
 };
 </script>
@@ -35,11 +41,13 @@ export default {
 .container {
   position: absolute;
   bottom: 8px;
-  left: 23px;
-  border: 1px solid gray;
+  left: 25px;
   height: 300px;
   width: 500px;
   overflow-y: scroll;
+}
+.container::-webkit-scrollbar {
+  display: none;
 }
 img {
   height: 190px;
@@ -48,5 +56,13 @@ img {
   float: left;
   margin: 5px;
   border-radius: 10px;
+}
+img:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.highlight {
+  border: 2px solid rgb(148, 218, 45);
+  margin: 4px;
 }
 </style>

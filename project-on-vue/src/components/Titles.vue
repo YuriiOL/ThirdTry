@@ -11,9 +11,28 @@
     <br />
     <input type="text" placeholder="29 июля 2015" v-model="titles.title3" />Дата события
     <br />
-    <button @click="addFontAriston">Ariston</button>
-    <button @click="addFontDavinci">DaVinci</button>
-    <button @click="addFontBrody">Brody</button>
+    <button
+      @click="addFontAriston"
+      :class="{
+          addFontAriston: font == 1,
+          
+        }"
+    >Ariston</button>
+    <button
+      @click="addFontDavinci"
+      :class="{
+          
+          addFontDavinci: font == 2,
+         
+        }"
+    >DaVinci</button>
+    <button
+      @click="addFontBrody"
+      :class="{
+          
+          addFontBrody: font == 3
+        }"
+    >Brody</button>
   </div>
 </template>
 
@@ -62,5 +81,20 @@ button {
   font-size: 19px;
   opacity: 0.6;
   margin: 25px 5px;
+}
+.addFontAriston {
+  color: white;
+  background-color: rgb(125, 189, 31);
+  border: 1px solid rgb(125, 189, 31);
+}
+.addFontDavinci {
+  color: white;
+  background-color: rgb(125, 189, 31);
+  border: 1px solid rgb(125, 189, 31);
+}
+.addFontBrody {
+  color: white;
+  background-color: rgb(125, 189, 31);
+  border: 1px solid rgb(125, 189, 31);
 }
 </style>

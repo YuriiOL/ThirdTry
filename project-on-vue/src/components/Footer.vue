@@ -1,11 +1,22 @@
 <template>
   <div class="footer">
-    <div class="price">Стоимость: 0 грн</div>
+    <div class="price">
+      Стоимость:
+      <span class="numbers">
+        {{price}}
+        <span class="grn">грн</span>
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters(["price"])
+  }
+};
 </script>
 
 <style scoped>
@@ -20,5 +31,13 @@ export default {};
   position: absolute;
   right: 30px;
   top: 20px;
+}
+.numbers {
+  color: rgb(124, 187, 30);
+  font-size: 25px;
+  font-weight: bold;
+}
+.grn {
+  font-size: 15px;
 }
 </style>

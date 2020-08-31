@@ -1,9 +1,15 @@
-<template>
+s<template>
   <div class="sideBar">
     <div class="sideHead">Ваша картина</div>
     <div class="textInfo">
-      <p>Изображение: Не выбрано</p>
-      <p>Рама: Не выбрано</p>
+      <p>
+        Изображение:
+        <span class="title" v-if="chosenPics != ''">{{chosenPics[0].name}}</span>
+      </p>
+      <p>
+        Рама:
+        <span class="title" v-if="chosenBorder != ''">{{chosenBorder[0].name}}</span>
+      </p>
       <p>
         Отпечатки:
         <img class="colors" v-for="j in chosenColors" :key="j.id" :src="j" alt />
@@ -40,12 +46,12 @@
     <button @click="$router.push('/borders')" v-if="$router.history.current.name == 'Wrapper'">ДАЛЕЕ</button>
     <button @click="$router.push('/titles')" v-if="$router.history.current.name == 'Borders'">ДАЛЕЕ</button>
     <button @click="$router.push('/colors')" v-if="$router.history.current.name == 'Titles'">ДАЛЕЕ</button>
-    <button @click="send" v-if="$router.history.current.name == 'Colors'">В КОРЗИНУ</button>
+    <button @click="orderPrice(); send()" v-if="$router.history.current.name == 'Colors'">В КОРЗИНУ</button>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   computed: {
     ...mapGetters([
@@ -58,6 +64,7 @@ export default {
     ])
   },
   methods: {
+    ...mapMutations(["orderPrice"]),
     send() {
       const requestOptions = {
         method: "POST",
@@ -161,5 +168,8 @@ button {
   height: 13px;
   margin-left: 3px;
   border-radius: 3px;
+}
+.title {
+  font-weight: bold;
 }
 </style>
