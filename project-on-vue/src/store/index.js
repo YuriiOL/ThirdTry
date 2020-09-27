@@ -229,6 +229,10 @@ export default new Vuex.Store({
     chosenPics: [],
     //chosenColors: Save info about chosen colors after select
     chosenColors: [],
+    //Chosen colors for order list
+    chosenOrderColors: {
+      colors: ""
+    },
     //titles: Save info about titles after custumer writen down 
     titles: {
       title1: "",
@@ -256,11 +260,13 @@ export default new Vuex.Store({
     titles: state => state.titles,
     font: state => state.font,
     chosenColors: state => state.chosenColors,
+    chosenOrderColors: state => state.chosenOrderColors,
     order: state => state.order,
     price: state => state.price,
     selectPics: state => state.selectPics,
     selectBorders: state => state.selectBorders,
     sum: state => state.sum
+
   },
   mutations: {
     //add only one picture to array chosenPics, also add price, and order info to order array
@@ -312,7 +318,8 @@ export default new Vuex.Store({
     // add colors to order info, add price if in order more than 3 element and the same for 6 element
     addColors(state, value) {
       if (state.chosenColors.length < 8) {
-        state.order.push(value.name);
+        state.chosenOrderColors.colors += `${value.name} `;
+        state.order.splice(3, 1, `Colors: ${state.chosenOrderColors.colors}`)
         state.chosenColors.push(value.color);
         if (state.chosenColors.length == 3) {
           state.price.push(30);
@@ -332,7 +339,7 @@ export default new Vuex.Store({
     },
     //save price info to order list 
     orderPrice(state) {
-      state.order.push(`Price: ${state.sum}`);
+      state.order.splice(4, 1, `Price: ${state.sum}`)
     },
     //highlight select picture
     selectPicss(state, value) {
