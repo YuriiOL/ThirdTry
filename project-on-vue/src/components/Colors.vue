@@ -12,8 +12,9 @@
         :key="i.id"
         :src="i.img"
         @click="
+          i.select = !i.select;
           addColors(i);
-          i.select = true;
+          sayInfo();
         "
         v-bind:class="{ select: i.select }"
       />
@@ -28,7 +29,7 @@ export default {
     ...mapGetters(["colors", "chosenColors"])
   },
   methods: {
-    ...mapMutations(["addColors"])
+    ...mapMutations(["addColors", "sayInfo"])
   }
 };
 </script>

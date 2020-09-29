@@ -3,29 +3,105 @@
     <h3>Заголовок</h3>
     <p>
       персонализируйте ваше "Дерево пожеланий", вверху и в низу картины есть
-      спецыальне поля которые можно заполнить по вашему усмотрению: вписать
-      имена виновников торжества, или особые пожелания, добавить дату, или
-      логотип компании, если речь
-      <br />идьот о корпоративном порядке.
+      <br />спецыальне поля которые можно заполнить по вашему усмотрению:
+      вписать имена виновников торжества, или особые пожелания, добавить дату,
+      или логотип <br />
+      компании, если речь идьот о корпоративном порядке.
     </p>
     <!--writing titles for sidebar -->
-    <input type="text" placeholder="Наша свадьба" v-model="titles.title1" />Заголовок картины
+    <input
+      id="title1"
+      :class="{
+        warnning: valid == 3
+      }"
+      type="text"
+      placeholder="Наша свадьба"
+      v-model="titles.title1"
+    />Заголовок картины
     <br />
-    <input type="text" placeholder="Анастасия и Констатин" v-model="titles.title2" />Подпись
+    <input
+      id="title2"
+      :class="{
+        warnning: valid == 3
+      }"
+      type="text"
+      placeholder="Анастасия и Констатин"
+      v-model="titles.title2"
+    />Подпись
     <br />
-    <input type="text" placeholder="29 июля 2015" v-model="titles.title3" />Дата
-    события
+    <input
+      id="title3"
+      :class="{
+        warnning: valid == 3
+      }"
+      type="text"
+      placeholder="29 июля 2015"
+      v-model="titles.title3"
+    />Дата события
     <br />
     <!-- buttons gives font for titles in side bar -->
-    <button @click="addFontAriston" :class="{
-        addFontAriston: font == 1
-      }">Ariston</button>
-    <button @click="addFontDavinci" :class="{
-        addFontDavinci: font == 2
-      }">DaVinci</button>
-    <button @click="addFontBrody" :class="{
-        addFontBrody: font == 3
-      }">Brody</button>
+    <div
+      v-if="
+        titles.title1 === '' || titles.title2 === '' || titles.title3 === ''
+      "
+    >
+      <button
+        @click="titlesValidation"
+        :class="{
+          addFontAriston: font == 1,
+          warnning: valid == 3
+        }"
+      >
+        Ariston
+      </button>
+      <button
+        @click="titlesValidation"
+        :class="{
+          addFontDavinci: font == 2,
+          warnning: valid == 3
+        }"
+      >
+        DaVinci
+      </button>
+      <button
+        @click="titlesValidation"
+        :class="{
+          addFontBrody: font == 3,
+          warnning: valid == 3
+        }"
+      >
+        Brody
+      </button>
+    </div>
+    <div v-else>
+      <button
+        @click="addFontAriston"
+        :class="{
+          addFontAriston: font == 1,
+          warnning: valid == 3
+        }"
+      >
+        Ariston
+      </button>
+      <button
+        @click="addFontDavinci"
+        :class="{
+          addFontDavinci: font == 2,
+          warnning: valid == 3
+        }"
+      >
+        DaVinci
+      </button>
+      <button
+        @click="addFontBrody"
+        :class="{
+          addFontBrody: font == 3,
+          warnning: valid == 3
+        }"
+      >
+        Brody
+      </button>
+    </div>
   </div>
 </template>
 
@@ -33,10 +109,15 @@
 import { mapGetters, mapMutations } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["titles", "font"])
+    ...mapGetters(["titles", "font", "valid"])
   },
   methods: {
-    ...mapMutations(["addFontAriston", "addFontDavinci", "addFontBrody"])
+    ...mapMutations([
+      "addFontAriston",
+      "addFontDavinci",
+      "addFontBrody",
+      "titlesValidation"
+    ])
   }
 };
 </script>
@@ -89,5 +170,9 @@ button {
   color: white;
   background-color: rgb(125, 189, 31);
   border: 1px solid rgb(125, 189, 31);
+}
+.warnning {
+  border: 1px solid orangered;
+  color: orangered;
 }
 </style>

@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from '@/router/index'
 
 Vue.use(Vuex);
 
@@ -229,10 +230,6 @@ export default new Vuex.Store({
     chosenPics: [],
     //chosenColors: Save info about chosen colors after select
     chosenColors: [],
-    //Chosen colors for order list
-    chosenOrderColors: {
-      colors: ""
-    },
     //titles: Save info about titles after custumer writen down 
     titles: {
       title1: "",
@@ -249,7 +246,11 @@ export default new Vuex.Store({
     selectPics: 0,
     //variable make visual selected border
     selectBorders: 0,
-    sum: 0
+    sum: 0,
+    //highlight red color if is not valid
+    valid: 0,
+    //variable for call messege Header menu
+    headAvaileble: 0
   },
   getters: {
     pics: state => state.pics,
@@ -265,8 +266,8 @@ export default new Vuex.Store({
     price: state => state.price,
     selectPics: state => state.selectPics,
     selectBorders: state => state.selectBorders,
-    sum: state => state.sum
-
+    sum: state => state.sum,
+    valid: state => state.valid
   },
   mutations: {
     //add only one picture to array chosenPics, also add price, and order info to order array
@@ -277,6 +278,7 @@ export default new Vuex.Store({
       state.sum = state.price.reduce(function (a, b) {
         return a + b;
       }, 0);
+      state.valid = 0
     },
 
     //add only one border to array chosenBorder, also add price, and order info to order array
@@ -287,6 +289,7 @@ export default new Vuex.Store({
       state.sum = state.price.reduce(function (a, b) {
         return a + b;
       }, 0);
+      state.valid = 0
     },
     //add titles in side bar, save information about titles and font
     addFontAriston: state => {
@@ -317,29 +320,45 @@ export default new Vuex.Store({
     },
     // add colors to order info, add price if in order more than 3 element and the same for 6 element
     addColors(state, value) {
-      if (state.chosenColors.length < 8) {
-        state.chosenOrderColors.colors += `${value.name} `;
-        state.order.splice(3, 1, `Colors: ${state.chosenOrderColors.colors}`)
-        state.chosenColors.push(value.color);
-        if (state.chosenColors.length == 3) {
-          state.price.push(30);
-          state.sum = state.price.reduce(function (a, b) {
-            return a + b;
-          }, 0);
-        }
-        if (state.chosenColors.length == 6) {
-          state.price.push(30)
-          state.sum = state.price.reduce(function (a, b) {
-            return a + b;
-          }, 0);
-        }
-      } else {
-        return;
+
+      state.chosenColors.push(value);
+      //Show element whats get duble and need to remove
+      let toRemove = state.chosenColors.filter((item, index, array) => array.indexOf(item) !== index)
+      state.chosenColors = state.chosenColors.filter((el) => !toRemove.includes(el))
+      //////////////////////
+      state.valid = 0
+      if (state.chosenColors.length == 3) {
+        state.price.push(30);
+        state.sum = state.price.reduce(function (a, b) {
+          return a + b;
+        }, 0);
       }
+      if (state.chosenColors.length < 3) {
+        state.price.splice(2, 1)
+        state.sum = state.price.reduce(function (a, b) {
+          return a + b;
+        }, 0);
+      }
+      if (state.chosenColors.length == 6) {
+        state.price.push(30)
+        state.sum = state.price.reduce(function (a, b) {
+          return a + b;
+        }, 0);
+      }
+      if (state.chosenColors.length < 6) {
+        state.price.splice(3, 1)
+        state.sum = state.price.reduce(function (a, b) {
+          return a + b;
+        }, 0);
+      }
+
     },
-    //save price info to order list 
+    //save price info to order list and color list,
     orderPrice(state) {
+      let chosenOrderColors = state.chosenColors.map((item) => item.name)
+      state.order.splice(3, 1, `Colors: ${chosenOrderColors}`)
       state.order.splice(4, 1, `Price: ${state.sum}`)
+      alert("Your order is ready")
     },
     //highlight select picture
     selectPicss(state, value) {
@@ -349,7 +368,83 @@ export default new Vuex.Store({
     selectBorder(state, value) {
       state.selectBorders = value;
     },
+    //validate all steps
+    validation(state, route) {
+      if (route == "Wrapper") {
+        if (state.order.length < 1) {
+          state.valid = 1
+          setTimeout(() => {
+            state.valid = 0
+          }, 2000)
+        } else {
+          router.push("/borders")
+        }
+      } else if (route == "Borders") {
+        if (state.order.length < 2) {
+          state.valid = 2
+          setTimeout(() => {
+            state.valid = 0
+          }, 2000)
+        } else {
+          router.push("/titles")
+        }
+      } else if (route == "Titles") {
+        if (state.order.length < 3) {
+          return
+        } else {
+          router.push("/colors")
+        }
+      } else if (route == "Colors") {
+        if (state.order.length < 4) {
+          state.valid = 4
+          setTimeout(() => {
+            state.valid = 0
+          }, 2000)
+        }
+      }
+    },
+    //Titles Validation
+    titlesValidation(state) {
+      if (state.order.length < 3) {
+        state.valid = 3
+        setTimeout(() => {
+          state.valid = 0
+        }, 2000)
+      } else {
+        state.valid = 0
+      }
+      setTimeout(() => {
+        if (state.titles.title1 !== "") {
+          let a = document.querySelector("#title1")
+          a.classList.remove('warnning')
+        }
+      }, 0)
+      setTimeout(() => {
+        if (state.titles.title2 !== "") {
+          let a = document.querySelector("#title2")
+          a.classList.remove('warnning')
+        }
+      }, 0)
+      setTimeout(() => {
+        if (state.titles.title3 !== "") {
+          let a = document.querySelector("#title3")
+          a.classList.remove('warnning')
+        }
+      }, 0)
+
+    },
+    //Heder is available
+    sayInfo(state) {
+      if (state.headAvaileble == 0) {
+        state.headAvaileble++
+        alert("Header menu is available now!")
+      } else {
+        return
+      }
+
+    }
   },
+
   actions: {},
   modules: {}
 });

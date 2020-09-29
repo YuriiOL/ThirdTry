@@ -3,19 +3,41 @@ s<template>
     <div class="sideHead">Ваша картина</div>
     <div class="textInfo">
       <!-- show the name of selected picture -->
-      <p>
+      <p :class="{ validate: valid === 1 }">
         Изображение:
-        <span class="title" v-if="chosenPics != ''">{{ chosenPics[0].name }}</span>
+        <span class="title" v-if="chosenPics != ''">{{
+          chosenPics[0].name
+        }}</span>
+        <!-- show warning of no selected picture -->
+        <span class="warnning" v-if="valid === 1">{{
+          "Select picture first"
+        }}</span>
       </p>
       <!-- show the name of selected border -->
-      <p>
+      <p :class="{ validate: valid === 2 }">
         Рама:
-        <span class="title" v-if="chosenBorder != ''">{{ chosenBorder[0].name }}</span>
+        <span class="title" v-if="chosenBorder != ''">{{
+          chosenBorder[0].name
+        }}</span>
+        <!-- show warning of no selected borders -->
+        <span class="warnning" v-if="valid === 2">{{
+          "Select border first"
+        }}</span>
       </p>
       <!-- show the list of colors -->
-      <p>
+      <p :class="{ validate: valid === 4 }">
         Отпечатки:
-        <img class="colors" v-for="j in chosenColors" :key="j.id" :src="j" alt />
+        <img
+          class="colors"
+          v-for="j of chosenColors"
+          :key="j.id"
+          :src="j.color"
+          alt
+        />
+        <!-- show warning of no selected color -->
+        <span class="warnning" v-if="valid === 4">{{
+          "Select color first"
+        }}</span>
       </p>
     </div>
     <!-- shows all chosen elements -->
@@ -28,7 +50,9 @@ s<template>
           addFontDavinci: font == 2,
           addFontBrody: font == 3
         }"
-      >{{ titles.title1 }}</div>
+      >
+        {{ titles.title1 }}
+      </div>
       <!-- add title -->
       <div
         class="title2"
@@ -37,7 +61,9 @@ s<template>
           addFontDavinci: font == 2,
           addFontBrody: font == 3
         }"
-      >{{ titles.title2 }}</div>
+      >
+        {{ titles.title2 }}
+      </div>
       <!-- add title -->
       <div
         class="title3"
@@ -46,24 +72,62 @@ s<template>
           addFontDavinci: font == 2,
           addFontBrody: font == 3
         }"
-      >{{ titles.title3 }}</div>
+      >
+        {{ titles.title3 }}
+      </div>
       <!-- add img of pictures -->
       <img class="Pics" v-if="chosenPics != ''" :src="chosenPics[0].img" alt />
       <!-- add img of border -->
-      <img class="Border" v-if="chosenBorder != ''" :src="chosenBorder[0].img" alt />
+      <img
+        class="Border"
+        v-if="chosenBorder != ''"
+        :src="chosenBorder[0].img"
+        alt
+      />
     </div>
     <!-- depending on routs show button what send u to next routs  -->
-    <button @click="$router.push('/borders')" v-if="$router.history.current.name == 'Wrapper'">ДАЛЕЕ</button>
-    <button @click="$router.push('/titles')" v-if="$router.history.current.name == 'Borders'">ДАЛЕЕ</button>
-    <button @click="$router.push('/colors')" v-if="$router.history.current.name == 'Titles'">ДАЛЕЕ</button>
+    <!--Validation: If function is not valid show red color -->
+    <button
+      @click="validation($router.history.current.name)"
+      v-if="$router.history.current.name == 'Wrapper'"
+    >
+      ДАЛЕЕ
+    </button>
+    <button
+      @click="validation($router.history.current.name)"
+      v-if="$router.history.current.name == 'Borders'"
+    >
+      ДАЛЕЕ
+    </button>
+    <button
+      @click="
+        validation($router.history.current.name);
+        titlesValidation();
+      "
+      v-if="$router.history.current.name == 'Titles'"
+    >
+      ДАЛЕЕ
+    </button>
     <!-- add order info to payloadd -->
     <button
       @click="
         orderPrice();
         send();
       "
-      v-if="$router.history.current.name == 'Colors'"
-    >В КОРЗИНУ</button>
+      v-if="
+        $router.history.current.name == 'Colors' && chosenColors.length >= 1
+      "
+    >
+      В КОРЗИНУ
+    </button>
+    <button
+      @click="validation($router.history.current.name)"
+      v-if="
+        $router.history.current.name == 'Colors' && chosenColors.length == 0
+      "
+    >
+      В КОРЗИНУ
+    </button>
   </div>
 </template>
 
@@ -77,11 +141,12 @@ export default {
       "titles",
       "font",
       "chosenColors",
-      "order"
+      "order",
+      "valid"
     ])
   },
   methods: {
-    ...mapMutations(["orderPrice"]),
+    ...mapMutations(["orderPrice", "validation", "titlesValidation"]),
     //make post request
     send() {
       const requestOptions = {
@@ -199,4 +264,10 @@ button:hover {
 .title {
   font-weight: bold;
 }
-</style>
+.validate {
+  color: orangered;
+}
+.warnning {
+  font-size: 12px;
+}
+</style>1
