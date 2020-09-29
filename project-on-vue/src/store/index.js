@@ -389,7 +389,7 @@ export default new Vuex.Store({
           router.push("/titles")
         }
       } else if (route == "Titles") {
-        if (state.order.length < 3) {
+        if (state.order.length < 3 || state.titles.title1 == '' || state.titles.title2 == '' || state.titles.title3 == '') {
           return
         } else {
           router.push("/colors")
